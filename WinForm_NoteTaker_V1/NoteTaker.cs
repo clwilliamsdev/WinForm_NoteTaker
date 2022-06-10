@@ -24,18 +24,27 @@ namespace WinForm_NoteTaker_V1
         public NoteTaker()
         {
             InitializeComponent();
-
-            DbControls.DgvLoad(NoteDgv);
-
-            //NoteDgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            //DataGridViewColumn column = NoteDgv.Columns[0];
-            //column.Width = 156;
-
         }
         
         public void NoteTaker_Load(object sender, EventArgs e)
         {
             Database db = new Database();
+
+            SQLiteConnection conn;
+            conn = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
+            conn.Open();
+            string load = "SELECT Title FROM Note";
+            SQLiteCommand command = new SQLiteCommand(load, conn);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(load, conn);
+            DataSet ds = new DataSet();
+            ds.Reset();
+            da.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            ((DataGridView)NoteDgv).DataSource = dt;
+            conn.Close();
+
+            DataGridViewColumn column = ((DataGridView)NoteDgv).Columns[0];
+            column.Width = 155;
         }
 
         private void NewBtn_Click(object sender, EventArgs e)
@@ -50,14 +59,46 @@ namespace WinForm_NoteTaker_V1
 
         public void DeleteBtn_Click(object sender, EventArgs e)
         {
+            DialogResult warning = MessageBox.Show("This will delete the note titled " + dbTitle + ". Do you want to proceed?", "Delete Note",
+                MessageBoxButtons.YesNo);
+            if (warning == DialogResult.Yes)
+            {
+                SQLiteConnection conn1;
+                conn1 = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
+                conn1.Open();
+                string delete = "DELETE FROM Note WHERE Title = @title";
+                SQLiteCommand command1 = new SQLiteCommand(delete, conn1);
+                command1.Parameters.AddWithValue("title", dbTitle);
+                command1.ExecuteNonQuery();
+                conn1.Close();
+
+                Console.WriteLine("Note Deleted");
+                MessageBox.Show("Note has been Deleted");
+            }
+
             
-            DbControls.DeleteNote(dbTitle);
-            DbControls.DgvLoad(NoteDgv);
+            SQLiteConnection conn;
+            conn = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
+            conn.Open();
+            string load = "SELECT Title FROM Note";
+            SQLiteCommand command = new SQLiteCommand(load, conn);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(load, conn);
+            DataSet ds = new DataSet();
+            ds.Reset();
+            da.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            ((DataGridView)NoteDgv).DataSource = dt;
+            conn.Close();
+
+            DataGridViewColumn column = ((DataGridView)NoteDgv).Columns[0];
+            column.Width = 155;
+
+
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)
         {
-            Navigation.ExitNav();
+            Application.Exit();
         }
 
         public void NoteDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)

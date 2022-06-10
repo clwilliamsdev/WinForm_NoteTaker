@@ -119,7 +119,7 @@
     <EmbeddedResource Include="NewNote.resx">
       <DependentUpon>NewNote.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\database.sqlite3" />
+    <None Include="bin\Debug\NoteTakerDB.sqlite3" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

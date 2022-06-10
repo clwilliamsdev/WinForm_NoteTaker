@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,15 @@ namespace WinForm_NoteTaker_V1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            DbControls.SaveNote(NewTitleEntry.Text, NewDetailEntry.Text);
+            SQLiteConnection conn = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
+            conn.Open();
+            string save = "INSERT INTO Note(Title, Detail)" + "Values('" + NewTitleEntry.Text + "', '" + NewDetailEntry.Text + "')";
+            SQLiteCommand command = new SQLiteCommand(save, conn);
+            command.ExecuteNonQuery();
+            conn.Close();
+
+            Console.WriteLine("Entry Saved");
+            MessageBox.Show("Entry has been saved");
 
             NewDetailEntry.Clear();
             NewTitleEntry.Clear();
@@ -35,7 +44,7 @@ namespace WinForm_NoteTaker_V1
 
         private void ExitBtn_Click(object sender, EventArgs e)
         {
-            Navigation.ExitNav();
+            Application.Exit();
         }
     }
 }

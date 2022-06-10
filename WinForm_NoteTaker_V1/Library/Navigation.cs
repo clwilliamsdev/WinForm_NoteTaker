@@ -35,9 +35,9 @@ namespace WinForm_NoteTaker_V1.Library
             Settings nt = new Settings();
             nt.ShowDialog();
         }
-            public static void ExitNav()
-        {
-            Application.Exit();
-        }
+        //    public static void ExitNav()
+        //{
+        //    Application.Exit();
+        //}
     }
 }

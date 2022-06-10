@@ -31,7 +31,7 @@ namespace WinForm_NoteTaker_V1
 
         private void ExitBtn_Click(object sender, EventArgs e)
         {
-            Navigation.ExitNav();
+            Application.Exit();
         }
 
         private void BackBtn_Click(object sender, EventArgs e)

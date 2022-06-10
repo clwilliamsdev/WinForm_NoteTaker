@@ -12,11 +12,11 @@ namespace WinForm_NoteTaker_V1.Library
     {  
         public Database()
         {            
-            SQLiteConnection conn = new SQLiteConnection("Data Source=database.sqlite3");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=NoteTakerDB.sqlite3");
 
-            if (!File.Exists("./database.sqlite3"))
+            if (!File.Exists("./NoteTakerDB.sqlite3"))
             { 
-                SQLiteConnection.CreateFile("database.sqlite3");
+                SQLiteConnection.CreateFile("NoteTakerDB.sqlite3");
                 Console.WriteLine("Database Created");
             }
             else

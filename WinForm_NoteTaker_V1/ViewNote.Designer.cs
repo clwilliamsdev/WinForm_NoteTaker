@@ -141,6 +141,7 @@ namespace WinForm_NoteTaker_V1
             this.Name = "ViewNote";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Note";
+            this.Load += new System.EventHandler(this.ViewNote_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
