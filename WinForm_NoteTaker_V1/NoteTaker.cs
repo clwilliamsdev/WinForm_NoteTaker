@@ -101,7 +101,12 @@ namespace WinForm_NoteTaker_V1
             Application.Exit();
         }
 
-        public void NoteDgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void SettingsBtn_Click(object sender, EventArgs e)
+        {
+            Navigation.SettingsNav(this);
+        }
+
+        private void NoteDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             tblPos = NoteDgv.CurrentCell.RowIndex;
 
@@ -111,14 +116,6 @@ namespace WinForm_NoteTaker_V1
                 Console.WriteLine(tblPos);
                 Console.WriteLine(dbTitle);
             }
-
         }
-
-        private void SettingsBtn_Click(object sender, EventArgs e)
-        {
-            Navigation.SettingsNav(this);
-        }
-
-        
     }
 }

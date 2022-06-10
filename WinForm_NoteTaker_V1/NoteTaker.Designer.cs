@@ -79,7 +79,8 @@ namespace WinForm_NoteTaker_V1
             this.NoteDgv.ShowRowErrors = false;
             this.NoteDgv.Size = new System.Drawing.Size(156, 254);
             this.NoteDgv.TabIndex = 0;
-            this.NoteDgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NoteDgv_CellContentClick);
+            this.NoteDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NoteDgv_CellClick);
+            
             // 
             // Noteslbl
             // 
