@@ -30,11 +30,9 @@ namespace WinForm_NoteTaker_V1
         {
             Database db = new Database();
 
-            SQLiteConnection conn;
-            conn = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=./NoteTakerDB.sqlite3");
             conn.Open();
             string load = "SELECT Title FROM Note";
-            SQLiteCommand command = new SQLiteCommand(load, conn);
             SQLiteDataAdapter da = new SQLiteDataAdapter(load, conn);
             DataSet ds = new DataSet();
             ds.Reset();
@@ -49,12 +47,16 @@ namespace WinForm_NoteTaker_V1
 
         private void NewBtn_Click(object sender, EventArgs e)
         {
-            Navigation.NewNoteNav(this);
+            this.Hide();
+            NewNote newNote = new NewNote();
+            newNote.ShowDialog();
         }
 
         public void ViewBtn_Click(object sender, EventArgs e)
         {
-            Navigation.ViewNoteNav(this);
+            this.Hide();
+            ViewNote viewNote = new ViewNote();
+            viewNote.ShowDialog();
         }
 
         public void DeleteBtn_Click(object sender, EventArgs e)
@@ -103,7 +105,9 @@ namespace WinForm_NoteTaker_V1
 
         private void SettingsBtn_Click(object sender, EventArgs e)
         {
-            Navigation.SettingsNav(this);
+            this.Hide();
+            Settings settings = new Settings();
+            settings.ShowDialog();
         }
 
         private void NoteDgv_CellClick(object sender, DataGridViewCellEventArgs e)

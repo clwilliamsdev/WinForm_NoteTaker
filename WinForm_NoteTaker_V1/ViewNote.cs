@@ -34,7 +34,7 @@ namespace WinForm_NoteTaker_V1
                     Console.WriteLine(NoteTaker.dbTitle);
 
                     Console.WriteLine("{0}", reader.GetString(1));
-                    NoteTaker.dbDetail = reader.GetString(1);
+                    ViewDetail.Text = reader.GetString(1);
                 }
             }
             else
@@ -45,7 +45,7 @@ namespace WinForm_NoteTaker_V1
             conn.Close();
 
             ViewTitle.Text = NoteTaker.dbTitle;
-            ViewDetail.Text = NoteTaker.dbDetail;
+            //ViewDetail.Text = NoteTaker.dbDetail;
         }
 
             public void UpdateBtn_Click(object sender, EventArgs e)
